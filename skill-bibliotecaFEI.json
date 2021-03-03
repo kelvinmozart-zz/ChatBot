@@ -1,0 +1,214 @@
+{
+  "intents": [
+    {
+      "intent": "Ajuda",
+      "examples": [
+        {
+          "text": "Preciso de ajuda com meu tcc"
+        },
+        {
+          "text": "preciso de ajuda com o meu tcc"
+        },
+        {
+          "text": "Preciso de ajuda com o meu trabalho"
+        },
+        {
+          "text": "Quero uma ajuda com o meu trabalho"
+        },
+        {
+          "text": "Tenho duvidas sobre a estrutura do meu trabalho"
+        },
+        {
+          "text": "Tenho duvidas sobre citação"
+        }
+      ]
+    },
+    {
+      "intent": "Entrega",
+      "examples": [
+        {
+          "text": "Aonde entrego meu tcc?"
+        },
+        {
+          "text": "Aonde entrego meu trabalho acadêmico?"
+        },
+        {
+          "text": "Aonde eu entrego o meu trabalho?"
+        },
+        {
+          "text": "Onde entrego meu TCC?"
+        },
+        {
+          "text": "Onde entrego minha tesse?"
+        },
+        {
+          "text": "tcc"
+        },
+        {
+          "text": "trabalho"
+        },
+        {
+          "text": "trabalho acadêmico"
+        }
+      ],
+      "description": "Entrega do trabalho acadêmico"
+    },
+    {
+      "intent": "Plagio",
+      "examples": [
+        {
+          "text": "Como detecto plagio?"
+        },
+        {
+          "text": "Como saber se meu trabalho tem plagio"
+        },
+        {
+          "text": "Onde pesquiso mais sobre plagio"
+        },
+        {
+          "text": "Plagio"
+        },
+        {
+          "text": "Quero saber mais sobre Plagio"
+        }
+      ],
+      "description": "Usuário quer saber mais sobre plagio"
+    }
+  ],
+  "entities": [],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_10_1614793749248",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "EntregaDeTrabalho",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O seu trabalho acadêmico deve ser entregue ao orientador. Uma copia da versão final pode ser encaminhada para o e-mail: <a href=\"bib.dissertacoes_teses@fei.edu.br\">Clique aqui.</a>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Entrega",
+      "dialog_node": "node_10_1614793749248",
+      "previous_sibling": "node_9_1614717722972"
+    },
+    {
+      "type": "standard",
+      "title": "AjudaComTCC",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para ajudar com o seu trabalho acadêmico segue os seguintes links: <br><a href=\"https://gerenciador.fei.edu.br/Content/Arquivos/Template/junho2017/Themes/Resources/docs/vestibular/22020/citacao_rev-2020.pdf\">Citação</a><br><a href=\"https://gerenciador.fei.edu.br/Content/Arquivos/Template/junho2017/Themes/Resources/imagens/biblioteca/ta/estrutura_2020.pdf\">Estrutura do trabalho</a><br><a href=\"https://gerenciador.fei.edu.br/Content/Arquivos/Template/junho2017/Themes/Resources/imagens/biblioteca/ta/referencias_2020.pdf\">Referências</a>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Ajuda",
+      "dialog_node": "node_7_1614795457960",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "PerguntaPlagio",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Você pode saber mais sobre plagio através dos link: \n<a href=\"http://www.plagiarismcombat.com/\">plagiarismcombat </a><br>  <a href=\"http://www.plagium.com/\">plagium</a><br>  <a href=\"http://plagiarisma.net/\">plagiarisma</a>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Plagio",
+      "dialog_node": "node_9_1614717722972",
+      "previous_sibling": "node_7_1614795457960"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "bibliotecaFEI",
+  "language": "pt-br",
+  "description": "Auxilia um usuário com as dúvidas em relação a página da biblioteca da FEI"
+}
